@@ -107,6 +107,16 @@ class Slider extends Component {
    */
   handleStart = e => {
     const { onChangeStart } = this.props
+    
+    let value = this.position(e)
+    if (
+      classList &&
+      classList.contains('rangeslider__label-item') &&
+      dataset.value
+    ) {
+      value = parseFloat(dataset.value)
+    }
+    
     document.addEventListener('mousemove', this.handleDrag)
     document.addEventListener('mouseup', this.handleEnd)
     this.setState(
@@ -114,7 +124,7 @@ class Slider extends Component {
         active: true
       },
       () => {
-        onChangeStart && onChangeStart(e)
+        onChangeStart && onChangeStart(value, e)
       }
     )
   }
@@ -131,7 +141,6 @@ class Slider extends Component {
     if (!onChange || className === 'rangeslider__labels') return
 
     let value = this.position(e)
-
     if (
       classList &&
       classList.contains('rangeslider__label-item') &&
@@ -149,12 +158,22 @@ class Slider extends Component {
    */
   handleEnd = e => {
     const { onChangeComplete } = this.props
+
+    let value = this.position(e)
+    if (
+      classList &&
+      classList.contains('rangeslider__label-item') &&
+      dataset.value
+    ) {
+      value = parseFloat(dataset.value)
+    }
+    
     this.setState(
       {
         active: false
       },
       () => {
-        onChangeComplete && onChangeComplete(e)
+        onChangeComplete && onChangeComplete(value, e)
       }
     )
     document.removeEventListener('mousemove', this.handleDrag)
