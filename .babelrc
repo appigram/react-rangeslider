@@ -4,19 +4,20 @@
       "@babel/preset-env",
       {
         "targets": {
-          "browsers": [
-            "last 2 versions"
-          ]
+          "browsers": ["last 2 versions"]
         }
       }
     ],
-    ["@babel/preset-react", {
-      "runtime": "automatic"
-    }]
+    [
+      "@babel/preset-react",
+      {
+        "runtime": "automatic"
+      }
+    ]
   ],
   "plugins": [
-    "@babel/plugin-proposal-object-rest-spread",
-    "@babel/plugin-proposal-class-properties"
+    "@babel/plugin-transform-object-rest-spread",
+    "@babel/plugin-transform-class-properties"
   ],
   "sourceMaps": true
 }
